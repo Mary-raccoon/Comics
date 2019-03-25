@@ -1,0 +1,21 @@
+{% if sold %}
+    {% for c in sold %}                       
+        <tr>
+            <td><img class="pic" src = "media/{{c.docfile}}"></td>
+            <td><a href="/view_from_sold/{{c.id}}">{{c.title}}</a></td>
+            <td>{{c.cover}}</td>
+            <td>{{c.creator}}</td>
+            <td>{{c.year|date:"m.d.Y"}}</td>
+            <td>${{c.price}}</td>
+            <td>${{c.price_sold}}</td>
+            <td>${{c.profit}}</td>
+            <td>{{c.qty}}</td>
+        
+            {% if c.author.id == request.session.id %}
+                <td>
+                    <a href="/{{c.id}}/edit">edit</a> 
+                </td> 
+            {% endif %}                
+        </tr>
+    {% endfor %}
+{% endif %}

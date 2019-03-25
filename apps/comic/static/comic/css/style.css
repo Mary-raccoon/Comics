@@ -1,0 +1,219 @@
+#login {
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+    margin-left: 25%;
+}
+#register {
+    display: inline-block;
+    width: 30%;
+}
+.add_comics_but {
+    display: inline-block;
+    width: 15%;
+    margin: 1%;    
+}
+.all_comics_body {
+    background-image: url("/media/background/1.jpg");
+}
+.all_comics_body, .my_collection_body, .wish_body, .sold_body, .body_login {
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+body {
+    background-color: #cccccc;
+}
+.body_login {
+    background-color: rgb(36, 36, 36);
+    text-align: center;
+    background-image: url("/media/background/3.jpg");
+}
+.body_login button {
+    padding: 2% 6%;
+    color: black;
+    background-color: rgb(187, 6, 6);
+    border-color: rgb(187, 6, 6);
+}
+.body_login button:hover {
+    color: black;
+    background-color: rgb(122, 9, 9);
+    border-color:  rgb(179, 89, 89);
+}
+.body_login button:active{
+    background-color: rgb(187, 6, 6);
+    border-color: rgb(187, 6, 6);
+}
+.body_login h2 {
+    color: rgb(245, 233, 233);
+    text-align: left;
+    margin-bottom: 5%;
+}
+.body_login input {
+    background-color: rgb(61, 61, 61);
+    padding: 4%;
+    color: white;
+}
+.body_login input:focus {
+    background-color: rgb(61, 61, 61);
+    color: white;
+}
+#chartContainer {
+    display:inline-block;
+    max-width: 1380px;
+    padding: 1%;
+    margin: 1%;
+    
+}
+.checkmark {
+    width: 30px;
+    background-color: transparent;
+    border: 1px solid black;
+}
+.container {
+    color: white;
+    display:inline-block;
+    width: 100%;
+    background-color:  rgba(61, 70, 77, 0.9);
+    padding: 1%;
+    margin: 1%;
+    border: 3px solid white;
+}
+.create {
+    background-color: #cccccc;
+}
+.create_edit_general {
+    display: inline-block;
+    width: 30%;
+    margin: 1%;
+}
+.create_edit_purchase, .create_edit_sell {
+    display: inline-block;
+    width: 15%;
+    margin: 1%;
+    vertical-align: top;
+}
+.desc {
+    display: inline-block;
+    width: 25%;
+    margin: 1%;
+    vertical-align: top;
+}
+.destroy {
+    display: inline-block;
+    margin: 2%;
+}
+.filter {
+    display: inline-block;
+    width:55%;
+    text-align: left;
+    margin: 1%;    
+}
+.filter label {
+    margin-right: 1%;
+}
+.form_sort {
+    display: inline-block;
+    width: 20%;
+    margin: 1%;
+}
+.form_sort select {
+    width: 70%;
+}
+h4 {
+    margin: 2%;
+}
+.head1 {
+    text-align: center;
+    margin: 4%;
+    font-weight: 600; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 80px;
+    color:rgb(187, 6, 6);
+    text-shadow: 1px 1px 2px white, 0 0 50px rgb(255, 0, 0), 0 0 10px rgb(73, 0, 0);
+}
+.info {
+    display: inline-block;
+    width: 55%; 
+    vertical-align: top;
+}
+input[type="file" i] {
+    margin-top: 15%;
+}
+label {
+    margin-left: 1%;
+}
+.login_general {
+    display: inline-block;
+    width: 80%;
+    background-color:  rgba(61, 70, 77, 0.9);
+    margin: 5% 1%;
+    padding: 0 10% 2% 10%;
+}
+.my_collection_body {
+    background-image: url("/media/background/6.jpg");
+}
+.pic{
+    width: 100px; 
+    height: auto;
+    border: 1px solid white;
+}
+.show_img {
+    display: inline-block;
+    width: 30%; 
+    height: auto;
+    margin: 1% 1% 1% 5%;
+    border: 10px ridge gray;
+}
+.show_general, .show_purchase, .show_sold {
+    display: inline-block;
+    width: 90%; 
+    margin: 2%;
+}
+.show_general p {
+    width: 400px;
+}
+.sold_body {
+    background-image: url("/media/background/8.jpg");
+}
+.sub_but {
+    display: inline-block;
+    width: 30%;
+    margin: 1% 30% 1% 35%;
+}
+table a:link, a:visited {
+    color: white;  
+}
+table tr:hover {
+    background-color: rgba(113, 139, 160, 0.5);
+}
+.top {
+    background-color: rgba(61, 70, 77, 0.9);
+    margin: 1%;
+    border: 3px solid white;
+    color: white;
+}
+.top input {
+    width: 163px;
+}
+.wish_body {
+    background-image: url("/media/background/7.jpg");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

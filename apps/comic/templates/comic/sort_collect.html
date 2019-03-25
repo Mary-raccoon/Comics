@@ -1,0 +1,21 @@
+{% if my_comics %}
+    {% for c in my_comics %}   
+        <tr>
+            <td><img class="pic" src = "media/{{c.docfile}}"></td>
+            <td><a href="/view_from_my_collection/{{c.id}}">{{c.title}}</a></td>
+            <td>{{c.cover}}</td>
+            <td>{{c.creator}}</td>
+            <td>{{c.year|date:"M d, Y" }}</td>
+            <td>${{c.price}}</td>
+            <td>{{c.qty}}</td>
+            <td>
+                <a href="/{{c.id}}/to_sell">Sold</a>
+            </td> 
+            {% if c.author.id == request.session.id %}
+                <td>
+                    <a href="/{{c.id}}/edit">edit</a> 
+                </td> 
+            {% endif %}                
+        </tr>
+    {% endfor %}
+{% endif %}               

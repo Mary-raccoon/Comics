@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'comic/css/style.css' %}">
+    <title>Wishlist</title>  
+</head>
+<body class="wish_body">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a id="all_comics" class="nav-link" href="/all_comics" >All comics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="wishlist" class="nav-link active" href="/wishlist" >Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="my_collection" class="nav-link" href="/my_collection">Collection </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="sold" class="nav-link" href="/sold">Sold</a>
+                    </li>
+                    <li class="nav-item logout">
+                        <a class="nav-link disabled" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="top">
+        <div class='filter'>
+            <form action="/wishlist" method="post">
+                {% csrf_token %}
+                <label for="year">Year: <input type="text" name="year" ></label>
+                <label for="title">Title: <input type="text" name="title" ></label>
+                <label for="creator">Author: <input type="text" name="creator" ></label>
+                <button class="btn btn-dark">Search</button>
+            </form>
+        </div>
+        <div class="form_sort">
+            <form action="/sort" method="post" id='sort_form_wish'>
+                {% csrf_token %}
+                <select name="sort" class="custom-select mr-sm-2" >
+                    <option value="Choose" selected>Choose...</option>
+                    <option value="Title_a">Title A-Z</option>
+                    <option value="Title_z">Title Z-A</option>
+                    <option value="Year">Cover date</option> 
+                    <option value="Last_added">Last added</option>
+                </select>
+                <button id="wish_sort" class="btn btn-dark">Sort</button>
+            </form>
+        </div>
+        <div class="add_comics_but">
+            <a class="btn btn-outline-success btn-block" href="/new_comic_wishlist" role="button">Add a Comics</a>   
+        </div>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Cover</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Operations</th>   
+                    <th>Functions</th>  
+                </tr>
+            </thead>
+            <tbody class="placeholder"></tbody>
+            <tbody>
+                {% if wishlist %}
+                    {% for c in wishlist %}                       
+                        <tr>
+                            <td><img class="pic" src = "media/{{c.docfile}}"></td>
+                            <td><a href="/view_from_wishlist/{{c.id}}">{{c.title}}</a></td>
+                            <td>{{c.cover}}</td>
+                            <td>{{c.creator}}</td>
+                            <td>{{c.year|date:"M d, Y"}}</td>
+                            <td>{{c.price}}</td>
+                            <td>
+                                <a href="/from_wish_to_collect/{{c.id}}">add to my collection</a>
+                            </td> 
+                            {% if c.author.id == request.session.id %}
+                                <td>
+                                    <a href="/{{c.id}}/edit_wish">edit</a>  
+                                </td> 
+                            {% endif %}                
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+        $('#wish_sort').click(function() {
+            console.log('serialized info', $('#sort_form_wish').serialize());
+            $.ajax({
+            method: "POST",
+            url: $('#sort_form_wish').attr('action'),
+            data: $('#sort_form_wish').serialize(),
+            success: function( response ) {
+                    console.log('received response:', response)
+                    $('.placeholder').html(response);
+            }
+            });
+            return false;
+        });
+    </script>
+</body>
+</html>

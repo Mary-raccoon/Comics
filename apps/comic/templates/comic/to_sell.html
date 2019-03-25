@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'comic/css/style.css' %}">
+    <title>Preparing Comics to sell</title>  
+    </head>
+    <body>
+        {% include "comic/header.html" %}
+        <div class="new_job">
+        
+            <h2>Preparing Comics to sell</h2> 
+            <form action="/from_collect_to_sold/{{comic.id}}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="qty">Quantity:</label>
+                    <input type="text" name="qty" value="{{comic.qty}}">
+                    {% if messages %}
+                    <p>
+                        {% for message in messages %}
+                        {%if 'qty' in message.tags %}
+                        <span style="color: red">{{ message }} </span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input name="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price" value="{{comic.price}}"/>
+                    {% if messages %}
+                    <p>
+                        {% for message in messages %}
+                        {%if 'price' in message.tags %}
+                            <span style="color: red">{{ message }} </span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                </div> 
+                <div class="form-group">
+                    <label for="price_sold">Price sold:</label>
+                    <input name="price_sold" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price_sold" value="{{comic.price_sold}}"/>
+                    {% if messages %}
+                    <p>
+                        {% for message in messages %}
+                        {%if 'price_sold' in message.tags %}
+                            <span style="color: red">{{ message }} </span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                </div> 
+               
+                <div class="form-group">
+                    <label for="date_of_purchase">Date of purchase (YYYY-MM-DD:</label>
+                    <input name="date_of_purchase" type="text id="date_of_purchase" value="{{comic.date_of_purchase|date:'Y-m-d' }}"/>
+                    {% if messages %}
+                    <p>
+                        {% for message in messages %}
+                        {%if 'date_of_purchase' in message.tags %}
+                            <span style="color: red">{{ message }} </span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                </div> 
+                <div class="form-group">
+                    <label for="date_of_sale">Date of sale (YYYY-MM-DD):</label>
+                    <input name="date_of_sale" type="date" id="date_of_sale" value="{{comic.date_of_sale|date:'Y-m-d'}}"/>
+                    {% if messages %}
+                    <p>
+                        {% for message in messages %}
+                        {%if 'date_of_sale' in message.tags %}
+                            <span style="color: red">{{ message }} </span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form> 
+        </div>
+    </body>
+</html>
+
