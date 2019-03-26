@@ -107,9 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-# DATETIME_INPUT_FORMATS = '%m/%d/%Y'
-# DATE_FORMAT = '%m/%d/%Y'
-# TIME_INPUT_FORMATS = '%m/%d/%Y'
 TIME_ZONE = 'America/Los_Angeles'
 
 DATE_INPUT_FORMATS = [
@@ -132,5 +129,5 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'D:/OpenServer/domains/mysite/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
