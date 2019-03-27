@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vi$d+)y1frs#p*^%gc54g79e%a4no1s4s8n&cq$mpd+i9l^9*+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['18.222.221.239']
 
 
 # Application definition
@@ -128,6 +128,13 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+=======
+# STATIC_ROOT = 'D:/OpenServer/domains/mysite/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+>>>>>>> e3571ec86b9f5e1306a114b9f0df73bfcd471bce
