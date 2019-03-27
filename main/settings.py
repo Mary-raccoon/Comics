@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vi$d+)y1frs#p*^%gc54g79e%a4no1s4s8n&cq$mpd+i9l^9*+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['18.188.86.220']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -129,5 +129,5 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/img/media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')

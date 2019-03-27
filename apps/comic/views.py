@@ -220,6 +220,12 @@ def destroy_from_sold(request, id):
     print('cancel ', id)
     return redirect('/sold')
 
+def edit_all(request, id):
+    context = {
+		'comic': Comic.objects.get(id=id)
+	}
+    return render(request, 'comic/edit_all.html', context)
+
 
 def edit_collect(request, id):
     context = {
@@ -601,6 +607,27 @@ def to_sell(request, id):
 		'comic': Comic.objects.get(id=id)
 	}
     return render(request, 'comic/to_sell.html', context)
+
+def update_comic_all(request, id):
+    docfile = Comic.objects.get(id=id).docfile
+    print('docfile: ', docfile)
+    if request.method == "POST":
+        print("*"*20)
+        up_comic = Comic.objects.get(id=id)
+        up_comic.title = request.POST['title']
+        up_comic.desc = request.POST['desc']
+        up_comic.qty = request.POST['qty']
+        up_comic.price = request.POST['price']
+        up_comic.price_sold = request.POST['price_sold'] 
+        up_comic.date_of_purchase = request.POST['date_of_purchase']
+        up_comic.date_of_sale = request.POST['date_of_sale']
+        up_comic.creator = request.POST['creator']
+        up_comic.year = request.POST['year']
+        up_comic.cover = request.POST['cover']
+        up_comic.docfile = docfile
+        up_comic.save()
+
+        return redirect('/all_comics', docfile="docfile")
 
 
 def update_comic_collect(request, id):
