@@ -14,7 +14,7 @@
     margin: 1%;    
 }
 .all_comics_body {
-    background-image: url("/media/background/1.jpg");
+    background-image: url("/static/comic/img/1.jpg");
 }
 .all_comics_body, .my_collection_body, .wish_body, .sold_body, .body_login {
     text-align: center;
@@ -27,7 +27,7 @@ body {
 .body_login {
     background-color: rgb(36, 36, 36);
     text-align: center;
-    background-image: url("/media/background/3.jpg");
+    background-image: url("/static/comic/img/3.jpg");
 }
 .body_login button {
     padding: 2% 6%;
@@ -151,7 +151,7 @@ label {
     padding: 0 10% 2% 10%;
 }
 .my_collection_body {
-    background-image: url("/media/background/6.jpg");
+    background-image: url("/static/comic/img/6.jpg");
 }
 .pic{
     width: 100px; 
@@ -174,7 +174,7 @@ label {
     width: 400px;
 }
 .sold_body {
-    background-image: url("/media/background/8.jpg");
+    background-image: url("/static/comic/img/8.jpg");
 }
 .sub_but {
     display: inline-block;
@@ -197,7 +197,7 @@ table tr:hover {
     width: 163px;
 }
 .wish_body {
-    background-image: url("/media/background/7.jpg");
+    background-image: url("/static/comic/img/7.jpg");
 }
 
 
