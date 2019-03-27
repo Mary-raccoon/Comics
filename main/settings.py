@@ -128,13 +128,6 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-=======
-# STATIC_ROOT = 'D:/OpenServer/domains/mysite/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
->>>>>>> e3571ec86b9f5e1306a114b9f0df73bfcd471bce
