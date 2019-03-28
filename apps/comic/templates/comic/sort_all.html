@@ -1,7 +1,7 @@
 {% if all_comics %}
     {% for c in all_comics %}   
         <tr>
-            <td><img class="pic" src = "/static/comic/img/media/{{c.docfile}}"></td>
+            <td><img class="pic" src = "{{ c.docfile.url }}" /></td>
             <td><a href="/view/{{c.id}}">{{c.title}}</a></td>
             <td>{{c.cover}}</td>
             <td>{{c.creator}}</td>
