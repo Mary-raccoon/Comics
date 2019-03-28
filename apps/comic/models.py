@@ -56,7 +56,7 @@ class ComicManager(models.Manager):
 class Comic(models.Model):
     title = models.CharField(max_length=255, blank=False)
     desc = models.TextField(blank=True)
-    docfile = models.FileField(blank=True)
+    docfile = models.FileField(blank=True, upload_to='media/')
     qty = models.IntegerField(blank=False)
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
     price_sold = models.DecimalField(max_digits=8, decimal_places=2, blank=True)

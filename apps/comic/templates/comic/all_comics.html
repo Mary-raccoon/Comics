@@ -73,6 +73,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th>Image</th>
+                    <th>Image</th>
                     <th>Title</th>
                     <th>Cover</th>
                     <th>Author</th>
@@ -87,7 +88,9 @@
                     {% for c in all_comics %}   
                        
                         <tr>
+                            <td>{{ c.docfile.url }}</td>
                             <td><img class="pic" src = "{{ c.docfile.url }}" /></td>
+
                             <td><a href="/view_from_all/{{c.id}}">{{c.title}}</a></td>
                             <td>{{c.cover}}</td>
                             <td>{{c.creator}}</td>
