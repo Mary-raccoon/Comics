@@ -49,14 +49,21 @@ class User(models.Model):
 class ComicManager(models.Manager):
     def comic_validator(self, postData):
         errors = {}
-        if len(postData['title']) < 4:
+        if len(postData['title']) < 3:
             errors['title'] = "Title should be more then 3 characters"
+        # if len(postData['docfile']) == None:
+        #     errors['docfile'] = "You should choose file for upload"
+        if len(postData['date_of_purchase']) <= 0:
+            errors['date_of_purchase'] = "Choose date"
+        if len(postData['date_of_sale']) <=0:
+            errors['date_of_sale'] = "Choose date"
         return errors
+
         
 class Comic(models.Model):
     title = models.CharField(max_length=255, blank=False)
     desc = models.TextField(blank=True)
-    docfile = models.FileField(blank=True, upload_to='media/')
+    docfile = models.FileField(blank=True)
     qty = models.IntegerField(blank=False)
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
     price_sold = models.DecimalField(max_digits=8, decimal_places=2, blank=True)

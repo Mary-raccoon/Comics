@@ -140,6 +140,15 @@
                     </div>
                     <div>
                         <input id="docfile" type="file" value="Browse" name="docfile" />
+                        {% if messages %}
+                        <p>
+                            {% for message in messages %}
+                            {%if 'docfile' in message.tags %}
+                            <span style="color: red">{{ message }} </span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="desc form-group">
