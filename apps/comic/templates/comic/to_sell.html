@@ -8,80 +8,82 @@
         <link rel="stylesheet" href="{% static 'comic/css/style.css' %}">
     <title>Preparing Comics to sell</title>  
     </head>
-    <body>
+    <body class='body_to_sell'>
         {% include "comic/header.html" %}
-        <div class="new_job">
-        
-            <h2>Preparing Comics to sell</h2> 
-            <form action="/from_collect_to_sold/{{comic.id}}" method="POST" enctype="multipart/form-data">
+            <h4>Preparing Comics to sell</h4> 
+            <form class="create_edit" action="/from_collect_to_sold/{{comic.id}}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group">
-                    <label for="qty">Quantity:</label>
-                    <input type="text" name="qty" value="{{comic.qty}}">
-                    {% if messages %}
-                    <p>
-                        {% for message in messages %}
-                        {%if 'qty' in message.tags %}
-                        <span style="color: red">{{ message }} </span>
+                <div class="to_sell">
+                    <div class="form-group">
+                        <label for="price">Purchase price:</label>
+                        <input name="price" class="form-control" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price" value="{{comic.price}}"/>
+                        {% if messages %}
+                        <p>
+                            {% for message in messages %}
+                            {%if 'price' in message.tags %}
+                                <span style="color: red">{{ message }} </span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
                         {% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    <label for="price">Price:</label>
-                    <input name="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price" value="{{comic.price}}"/>
-                    {% if messages %}
-                    <p>
-                        {% for message in messages %}
-                        {%if 'price' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
+                    </div> 
+                    <div class="form-group">
+                        <label for="date_of_purchase">Date of purchase (YYYY-MM-DD):</label>
+                        <input name="date_of_purchase" class="form-control" type="text id="date_of_purchase" value="{{comic.date_of_purchase|date:'Y-m-d' }}"/>
+                        {% if messages %}
+                        <p>
+                            {% for message in messages %}
+                            {%if 'date_of_purchase' in message.tags %}
+                                <span style="color: red">{{ message }} </span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
                         {% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
-                </div> 
-                <div class="form-group">
-                    <label for="price_sold">Price sold:</label>
-                    <input name="price_sold" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price_sold" value="{{comic.price_sold}}"/>
-                    {% if messages %}
-                    <p>
-                        {% for message in messages %}
-                        {%if 'price_sold' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="price_sold">Price sold:</label>
+                        <input name="price_sold" class="form-control" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency" id="price_sold" value="{{comic.price_sold}}"/>
+                        {% if messages %}
+                        <p>
+                            {% for message in messages %}
+                            {%if 'price_sold' in message.tags %}
+                                <span style="color: red">{{ message }} </span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
                         {% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
-                </div> 
+                    </div> 
                
-                <div class="form-group">
-                    <label for="date_of_purchase">Date of purchase (YYYY-MM-DD:</label>
-                    <input name="date_of_purchase" type="text id="date_of_purchase" value="{{comic.date_of_purchase|date:'Y-m-d' }}"/>
-                    {% if messages %}
-                    <p>
-                        {% for message in messages %}
-                        {%if 'date_of_purchase' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
+                    <div class="form-group">
+                        <label for="date_of_sale">Date of sale (YYYY-MM-DD):</label>
+                        <input name="date_of_sale" class="form-control" type="date" id="date_of_sale" value="{{comic.date_of_sale|date:'Y-m-d'}}"/>
+                        {% if messages %}
+                        <p>
+                            {% for message in messages %}
+                            {%if 'date_of_sale' in message.tags %}
+                                <span style="color: red">{{ message }} </span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
                         {% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
-                </div> 
-                <div class="form-group">
-                    <label for="date_of_sale">Date of sale (YYYY-MM-DD):</label>
-                    <input name="date_of_sale" type="date" id="date_of_sale" value="{{comic.date_of_sale|date:'Y-m-d'}}"/>
-                    {% if messages %}
-                    <p>
-                        {% for message in messages %}
-                        {%if 'date_of_sale' in message.tags %}
+                    </div>
+                    <div class="form-group">
+                        <label for="qty">Quantity:</label>
+                        <input class="form-control" type="text" name="qty" value="{{comic.qty}}">
+                        {% if messages %}
+                        <p>
+                            {% for message in messages %}
+                            {%if 'qty' in message.tags %}
                             <span style="color: red">{{ message }} </span>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
                         {% endif %}
-                        {% endfor %}
-                    </p>
-                    {% endif %}
+                    </div>
+                
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </form> 
         </div>
     </body>

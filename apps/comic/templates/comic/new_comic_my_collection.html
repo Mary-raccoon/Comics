@@ -11,7 +11,6 @@
     <body class="create">
         {% include "comic/header.html" %}
         <div>
-        
             <h4>Adding new comics to my Collection</h4> 
             <form class="create_edit" action="/add_to_my_collection" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -19,7 +18,7 @@
                     <input type="hidden" name="type" value="post_comic">
                     <div class="form-group">
                         <label for="title">Title:</label>
-                        <input name="title" type="text" class="form-control" id="title">
+                        <input name="title" type="text" class="form-control" id="title" value="{{comic.title}}">
                         {% if messages %}
                         <p>
                             {% for message in messages %}
@@ -74,7 +73,7 @@
                 <div class="create_edit_purchase">  
                     <div class="form-group">
                         <label for="price">Purchase price:</label>
-                        <input name="price" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency form-control" id="price" />
+                        <input name="price" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency form-control" id="price" >
                         {% if messages %}
                         <p>
                             {% for message in messages %}
@@ -87,7 +86,7 @@
                     </div>
                     <div class="form-group">
                         <label for="date_of_purchase">Date of purchase:</label>
-                        <input name="date_of_purchase" type="date" id="date_of_purchase" class="form-control"/>
+                        <input name="date_of_purchase" type="date" id="date_of_purchase" class="form-control" formnovalidate>
                         {% if messages %}
                         <p>
                             {% for message in messages %}
@@ -122,41 +121,11 @@
                         </p>
                         {% endif %}
                     </div>
-                </div>
-                
-                <div class="create_edit_sell">
-                    <div class="form-group">
-                        <label for="price_sold">Price sold:</label>
-                        <input name="price_sold" type="number" value="0" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency form-control" id="price_sold" />
-                        {% if messages %}
-                        <p>
-                            {% for message in messages %}
-                            {%if 'price_sold' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
-                            {% endif %}
-                            {% endfor %}
-                        </p>
-                        {% endif %}
-                    </div> 
-                
-                    <div class="form-group">
-                        <label for="date_of_sale">Date of sale:</label>
-                        <input name="date_of_sale" type="date" id="date_of_sale" class="form-control"/>
-                        {% if messages %}
-                        <p>
-                            {% for message in messages %}
-                            {%if 'date_of_sale' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
-                            {% endif %}
-                            {% endfor %}
-                        </p>
-                        {% endif %}
-                    </div>
                     <div>
-                        <input id="docfile" type="file" value="Browse" name="docfile" />
+                        <input id="docfile" type="file" value="Browse" name="docfile" >
                     </div>
-
                 </div>
+                
                 <div class="desc form-group">
                     <label for="desc">Description:</label>
                     <textarea rows="8" name="desc" class="form-control" id="desc" ></textarea>

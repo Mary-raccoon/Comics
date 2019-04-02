@@ -18,24 +18,25 @@ def add_to_my_collection(request):
         return redirect('/new_comic_my_collection')
     else:
         if request.method == 'POST':
-        
             comic = Comic.objects.create(
                 title = request.POST['title'].capitalize(), 
                 desc = request.POST['desc'], 
                 docfile = request.FILES['docfile'],
                 qty = request.POST['qty'], 
                 price = request.POST['price'], 
-                price_sold = request.POST['price_sold'], 
+                price_sold = 0, 
                 profit = 0,
                 date_of_purchase = request.POST['date_of_purchase'], 
-                date_of_sale = request.POST['date_of_sale'], 
+                date_of_sale = None, 
                 author_id = request.session['id'],
                 year = request.POST['year'],
                 cover = request.POST['cover'],
                 creator = request.POST['creator'],
             )
+
             messages.success(request, "Comics successfully created")
             print("id: ", comic.id)
+            print("title: ", comic.title)
             print(comic.docfile.name)
             this_user = User.objects.get(id=request.session['id'])
             this_comic = Comic.objects.get(id=comic.id)
@@ -58,13 +59,13 @@ def add_to_wishlist(request):
                 title = request.POST['title'].capitalize(), 
                 desc = request.POST['desc'], 
                 docfile = request.FILES['docfile'],
-                qty = request.POST['qty'], 
+                qty = 1, 
                 cover = request.POST['cover'],
                 price = request.POST['price'], 
-                price_sold = request.POST['price_sold'], 
+                price_sold = 0, 
                 profit = 0,
-                date_of_purchase = request.POST['date_of_purchase'], 
-                date_of_sale = request.POST['date_of_sale'], 
+                date_of_purchase = None, 
+                date_of_sale = None, 
                 author_id = request.session['id'],
                 creator = request.POST['creator'],
                 year = request.POST['year'],
@@ -72,6 +73,7 @@ def add_to_wishlist(request):
             request.session['title'] = comic.title
             messages.success(request, "Comics successfully created")
             print("id: ", comic.id)
+            print("title: ", comic.title)
             print(comic.docfile.name)
             this_user = User.objects.get(id=request.session['id'])
             this_comic = Comic.objects.get(id=comic.id)
@@ -340,7 +342,7 @@ def login(request):
     if len(errors):
         for key, value in errors.items():
             messages.error(request, value, extra_tags="login")
-        return redirect('/')
+        return redirect('/log_reg')
     user =User.objects.get(email = request.POST['email1'])
     if(bcrypt.checkpw(request.POST['password1'].encode(), user.password.encode())):
         print("password match")
@@ -416,7 +418,7 @@ def register(request):
     if len(errors):
         for field, msg in errors.items():
             messages.error(request, msg, extra_tags=field)
-        return redirect('/')
+        return redirect('/log_reg')
     else:
         hash_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
         print(hash_password)
@@ -505,8 +507,7 @@ def sort_all(request, methods=['POST']):
             new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
             new_obj.append(a)
     all_comics = new_obj  
-    user = User.objects.get(id=request.session['id'])
-    wishlist = user.added_to_wishlist_comic.all()
+    
     context = {
         'all_comics': all_comics,
         'user': user,

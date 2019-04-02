@@ -3,6 +3,8 @@ from django.db import models
 import bcrypt
 import re
 
+
+
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]+(\s[a-zA-Z]+)?$')
 class UserManager(models.Manager):
@@ -53,10 +55,13 @@ class ComicManager(models.Manager):
             errors['title'] = "Title should be more then 3 characters"
         # if len(postData['docfile']) == None:
         #     errors['docfile'] = "You should choose file for upload"
-        if len(postData['date_of_purchase']) <= 0:
-            errors['date_of_purchase'] = "Choose date"
-        if len(postData['date_of_sale']) <=0:
-            errors['date_of_sale'] = "Choose date"
+        # if len(postData['date_of_purchase']) <= 0:
+        #     errors['date_of_purchase'] = "Choose date"
+        # if len(postData['date_of_sale']) <=0:
+        #     errors['date_of_sale'] = "Choose date"
+        # if postData['date_of_sale'] != None:
+        #     if postData['date_of_sale'] < postData['date_of_purchase']:
+        #         errors['date_of_sale'] = "Date of sale should be later than the purchase date."
         return errors
 
         
@@ -68,8 +73,8 @@ class Comic(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
     price_sold = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
     profit = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
-    date_of_purchase = models.DateField(null=True, blank=True, default='2019-01-01')
-    date_of_sale = models.DateField(null=True, blank=True, default='2019-01-01')
+    date_of_purchase = models.DateField(blank=True, null=True, auto_now_add=False, default='2019-01-01')
+    date_of_sale = models.DateField(blank=True, null=True, default='2019-01-01')
     author = models.ForeignKey(User, related_name="comics", on_delete=models.CASCADE)
     my_collection = models.ManyToManyField(User, related_name="added_to_my_collect_comic")
     wishlist = models.ManyToManyField(User, related_name="added_to_wishlist_comic")
@@ -77,7 +82,7 @@ class Comic(models.Model):
     created_at = models.DateField(auto_now=True)
     updated_at = models.DateField(auto_now=True)
     creator = models.CharField(max_length=255, blank=True)
-    year = models.DateField(null=True, blank=True, default='2019-01-01')
+    year = models.DateField(blank=True, null=True, default='2019-01-01')
     cover = models.CharField(max_length=255, blank=True)
     
     objects = ComicManager()
