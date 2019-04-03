@@ -139,6 +139,7 @@ h4 {
     display: inline-block;
     width: 55%; 
     vertical-align: top;
+    margin-top: 5%;
 }
 input[type="file" i] {
     margin-top: 15%;
@@ -172,7 +173,7 @@ label {
     display: inline-block;
     width: 30%; 
     height: auto;
-    margin: 1% 1% 1% 5%;
+    margin: 5% 1% 1% 5%;
     border: 10px ridge gray;
 }
 .show_general, .show_purchase, .show_sold {
