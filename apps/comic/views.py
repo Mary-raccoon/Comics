@@ -18,6 +18,7 @@ def add_to_my_collection(request):
         return redirect('/new_comic_my_collection')
     else:
         if request.method == 'POST':
+
             comic = Comic.objects.create(
                 title = request.POST['title'].capitalize(), 
                 desc = request.POST['desc'], 
@@ -33,7 +34,6 @@ def add_to_my_collection(request):
                 cover = request.POST['cover'],
                 creator = request.POST['creator'],
             )
-
             messages.success(request, "Comics successfully created")
             print("id: ", comic.id)
             print("title: ", comic.title)
@@ -221,6 +221,7 @@ def destroy_from_sold(request, id):
     Comic.objects.get(id=id).delete()
     print('cancel ', id)
     return redirect('/sold')
+
 
 def edit_all(request, id):
     context = {
@@ -507,7 +508,8 @@ def sort_all(request, methods=['POST']):
             new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
             new_obj.append(a)
     all_comics = new_obj  
-    
+    user = User.objects.get(id=request.session['id'])
+    wishlist = user.added_to_wishlist_comic.all()
     context = {
         'all_comics': all_comics,
         'user': user,
@@ -608,6 +610,7 @@ def to_sell(request, id):
 		'comic': Comic.objects.get(id=id)
 	}
     return render(request, 'comic/to_sell.html', context)
+
 
 def update_comic_all(request, id):
     docfile = Comic.objects.get(id=id).docfile

@@ -26,6 +26,7 @@ SECRET_KEY = 'vi$d+)y1frs#p*^%gc54g79e%a4no1s4s8n&cq$mpd+i9l^9*+'
 # DEBUG = False
 # ALLOWED_HOSTS = ['54.241.149.47']
 DEBUG = True
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages'
 ]
 
 MIDDLEWARE = [
@@ -129,8 +129,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -145,4 +146,3 @@ MEDIA_URL = '/media/'
 
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
