@@ -23,8 +23,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vi$d+)y1frs#p*^%gc54g79e%a4no1s4s8n&cq$mpd+i9l^9*+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-# ALLOWED_HOSTS = ['54.241.149.47']
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -130,8 +128,8 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'apps/comic/static/comic/media')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
