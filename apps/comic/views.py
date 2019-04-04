@@ -142,11 +142,11 @@ def all_c(request, methods=['POST']):
     # print(new_counter)
 
     context = {
-        'user': user,
+        # 'user': user,
         'all_comics': all_comics,
         # 'comics': Comic.objects.all(),
-        'new_counter': new_counter,  
-        'wishlist': wishlist 
+        # 'new_counter': new_counter,  
+        # 'wishlist': wishlist 
     }
     
     # all_comics = Comic.objects.all()
