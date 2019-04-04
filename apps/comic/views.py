@@ -134,13 +134,13 @@ def all_c(request, methods=['POST']):
     # print(new_cr_at)
     counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
     
-    # new_counter = []
+    new_counter = []
    
-    # for k, g in counter:
-    #     my_count = len(list(g))
-    #     print(k.year, k.month, k.day, my_count)
-    #     new_counter.append({'year': k.year, 'mon': k.month, 'day': k.day, 'c': my_count})
-    # print(new_counter)
+    for k, g in counter:
+        my_count = len(list(g))
+        print(k.year, k.month, k.day, my_count)
+        new_counter.append({'year': k.year, 'mon': k.month, 'day': k.day, 'c': my_count})
+    print(new_counter)
 
     context = {
         'user': user,
