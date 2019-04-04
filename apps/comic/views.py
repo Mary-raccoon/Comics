@@ -119,18 +119,18 @@ def all_c(request, methods=['POST']):
                                           title__icontains=request.POST['title'],
                                           creator__icontains=request.POST['creator'])
     
-    # for a in all_comics:
-    #     obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
-    #     created_at_obj = {'title': a.title,'created_at': a.created_at}
-    #     if obj_a in new:
-    #         print(a.title)
-    #     else:
-    #         new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
-    #         new_obj.append(a)
-    #         new_cr_at.append({'title': a.title,'created_at': a.created_at})
-    # all_comics = new_obj  
+    for a in all_comics:
+        obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
+        created_at_obj = {'title': a.title,'created_at': a.created_at}
+        if obj_a in new:
+            print(a.title)
+        else:
+            new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
+            new_obj.append(a)
+            new_cr_at.append({'title': a.title,'created_at': a.created_at})
+    all_comics = new_obj  
 
-    # print(new_cr_at)
+    print(new_cr_at)
     # counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
     
     # new_counter = []
