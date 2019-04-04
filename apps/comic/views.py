@@ -132,9 +132,9 @@ def all_c(request, methods=['POST']):
     all_comics = new_obj  
 
     print(new_cr_at)
-    counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
+    # counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
     
-    new_counter = []
+    # new_counter = []
    
     # for k, g in counter:
     #     my_count = len(list(g))
