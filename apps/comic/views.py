@@ -145,7 +145,7 @@ def all_c(request, methods=['POST']):
     context = {
         'user': user,
         'all_comics': all_comics,
-        # 'new_counter': new_counter,  
+        'new_counter': new_counter,  
         'wishlist': wishlist 
     }
     
