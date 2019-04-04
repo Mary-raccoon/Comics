@@ -41,6 +41,17 @@
             </div>
         </nav>
     </header>
+    <div class="top">
+        <div class='filter'>
+            <form action="/all_comics" method="post" >
+            {% csrf_token %}
+                <label for="year">Year: <input type="text" name="year" ></label>
+                <label for="title">Title: <input type="text" name="title" ></label>
+                <label for="creator">Author: <input type="text" name="creator" ></label>
+                <button class="btn btn-dark">Search</button>
+            </form>
+        </div>
+    </div>
     <div class="container">
         <table class="table">
             <thead class="thead-dark">

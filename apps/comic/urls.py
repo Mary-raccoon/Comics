@@ -39,6 +39,5 @@ urlpatterns = [
     url(r'^sort_sold$', views.sort_sold),
     url(r'^sort_all$', views.sort_all),   
     url(r'^logout$', views.logout),
-   
 ] 
 
