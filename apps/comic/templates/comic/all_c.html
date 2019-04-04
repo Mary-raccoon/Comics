@@ -125,5 +125,39 @@
             return false;
         });
     </script>
+    <script>
+        
+        window.onload = function () {
+        
+            var options = {
+                animationEnabled: true,  
+                title:{
+                    text: "All Comics"
+                },
+                axisX: {
+                    title: "Date",
+                    valueFormatString: "YYYY-MM-DD"
+                },
+                axisY: {
+                    title: "Qty",
+                    includeZero: false,
+                },
+                data: [{
+                    yValueFormatString: "#,###",
+                    xValueFormatString: "YYYY-MM-DD",
+                    type: "spline",
+                    toolTipContent: "{x} - {y}qty",
+                    dataPoints: [
+                        {% for d in new_counter %}
+                            
+                            { x: new Date({{d.year}}, {{d.mon}}, {{d.day}}), y: {{d.c}} },
+                                
+                        {% endfor %}
+                    ]
+                }]
+            };
+            $("#chartContainer").CanvasJSChart(options);
+        }
+    </script>
 </body>
 </html>
