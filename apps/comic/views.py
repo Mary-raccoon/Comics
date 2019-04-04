@@ -84,8 +84,8 @@ def add_to_wishlist(request):
 
 def all_c(request, methods=['POST']):
     all_comics = Comic.objects.all()
-    user = User.objects.get(id=request.session['id'])
-    wishlist = user.added_to_wishlist_comic.all()
+    # user = User.objects.get(id=request.session['id'])
+    # wishlist = user.added_to_wishlist_comic.all()
     new = []
     new_obj = []
     new_cr_at = []
