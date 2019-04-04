@@ -85,7 +85,8 @@ def add_to_wishlist(request):
 def all_c(request, methods=['POST']):
     all_comics = Comic.objects.all()
     user = User.objects.get(id=request.session['id'])
-    wishlist = user.added_to_wishlist_comic.all()
+    # wishlist = user.added_to_wishlist_comic.all()
+    print("user: ", request.session['id'])
     new = []
     new_obj = []
     new_cr_at = []
@@ -144,59 +145,10 @@ def all_c(request, methods=['POST']):
     context = {
         'user': user,
         'all_comics': all_comics,
-        # 'comics': Comic.objects.all(),
         # 'new_counter': new_counter,  
-        'wishlist': wishlist 
+        # 'wishlist': wishlist 
     }
     
-    # all_comics = Comic.objects.all()
-    # new = []
-    # new_obj = []
-    # new_cr_at = []
-
-    # if 'year' in request.POST == '':
-    #     all_comics = Comic.objects.filter(title__icontains=request.POST['title'],
-    #                                       creator__icontains=request.POST['creator'])
-
-    # if 'title' in request.POST == '':
-    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'], 
-    #                                       creator__icontains=request.POST['creator'])
-
-    # if 'creator' in request.POST == '':
-    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'],
-    #                                       title__icontains=request.POST['title'])
-       
-    # if 'year' in request.POST == '' and 'title' in request.POST == '':
-    #     all_comics = Comic.objects.filter(creator__icontains=request.POST['creator'])
-
-    # if 'year' in request.POST == '' and 'creator' in request.POST == '':
-    #     all_comics = Comic.objects.filter(title__icontains=request.POST['title'])
-
-    # if 'title' in request.POST == '' and 'creator' in request.POST == '':
-    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'])
-
-    # if 'title' in request.POST == '' and 'creator' in request.POST == '' and 'year' in request.POST == '':
-    #     all_comics = Comic.objects.all()
-
-    # if 'title' in request.POST != '' and 'creator' in request.POST != '' and 'year' in request.POST != '':
-    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'],
-    #                                       title__icontains=request.POST['title'],
-    #                                       creator__icontains=request.POST['creator'])
-    
-    # for a in all_comics:
-    #     obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
-    #     created_at_obj = {'title': a.title,'created_at': a.created_at}
-    #     if obj_a in new:
-    #         print(a.title)
-    #     else:
-    #         new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
-    #         new_obj.append(a)
-    #         new_cr_at.append({'title': a.title,'created_at': a.created_at})
-    # all_comics = new_obj  
-
-    # context = {
-    #     'all_comics': all_comics,
-    # }
     return render(request, 'comic/all_c.html', context)
 
 
