@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^log_reg$', views.index),
     url(r'^login$', views.login),
     url(r'^register$', views.register),
-    url(r'^all_comics$', views.all_comics),
+    url(r'^all_c$', views.all_c),
     url(r'^my_collection$', views.my_collection, name='my_collection'),
     url(r'^wishlist$', views.wishlist, name='wishlist'),
     url(r'^sold$', views.sold, name='sold'),

@@ -82,7 +82,7 @@ def add_to_wishlist(request):
             return redirect('/wishlist')
 
 
-def all_comics(request, methods=['POST']):
+def all_c(request, methods=['POST']):
     user = User.objects.get(id=request.session['id'])
     all_comics = Comic.objects.all()
     wishlist = user.added_to_wishlist_comic.all()
@@ -149,7 +149,7 @@ def all_comics(request, methods=['POST']):
         'wishlist': wishlist 
     }
     
-    return render(request, 'comic/all_comics.html', context)
+    return render(request, 'comic/all_c.html', context)
 
 
 def before(request, methods=['POST']):
@@ -331,7 +331,7 @@ def from_all_to_wish(request, id):
     this_comic = Comic.objects.get(id=id)
     this_comic.wishlist.add(this_user)
 
-    return redirect('/all_comics')
+    return redirect('/all_c')
 
 
 def index(request):
@@ -631,7 +631,7 @@ def update_comic_all(request, id):
         up_comic.docfile = docfile
         up_comic.save()
 
-        return redirect('/all_comics', docfile="docfile")
+        return redirect('/all_c', docfile="docfile")
 
 
 def update_comic_collect(request, id):
