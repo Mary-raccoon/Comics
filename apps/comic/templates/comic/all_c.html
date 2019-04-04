@@ -85,14 +85,14 @@
                 {% if all_comics %}
                     {% for c in all_comics %}             
                         <tr>
-                            <td><img class="pic" src = "{% static 'media/c.docfile' %}" /></td>
+                            <td><img class="pic" src = "{% static 'media/{{c.docfile}}' %}" /></td>
                             <td><a href="/view_from_all/{{c.id}}">{{c.title}}</a></td>
                             <td>{{c.cover}}</td>
                             <td>{{c.creator}}</td>
                             <td>{{c.year|date:"M d, Y" }}</td>
                             <td>
                                 {% if c in wishlist %}
-                                    <img class="checkmark" src="{% static 'img/c.docfile' %}">
+                                    <img class="checkmark" src="{% static 'img/{{c.docfile}}' %}">
                                 {% else %}
                                     <a href="from_all_to_wish/{{c.id}}">To my wishlist</a>
                                 {% endif %} 
