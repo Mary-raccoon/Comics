@@ -83,9 +83,73 @@ def add_to_wishlist(request):
 
 
 def all_c(request, methods=['POST']):
-    user = User.objects.get(id=request.session['id'])
+    # user = User.objects.get(id=request.session['id'])
+    # all_comics = Comic.objects.all()
+    # wishlist = user.added_to_wishlist_comic.all()
+    # new = []
+    # new_obj = []
+    # new_cr_at = []
+
+    # if 'year' in request.POST == '':
+    #     all_comics = Comic.objects.filter(title__icontains=request.POST['title'],
+    #                                       creator__icontains=request.POST['creator'])
+
+    # if 'title' in request.POST == '':
+    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'], 
+    #                                       creator__icontains=request.POST['creator'])
+
+    # if 'creator' in request.POST == '':
+    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'],
+    #                                       title__icontains=request.POST['title'])
+       
+    # if 'year' in request.POST == '' and 'title' in request.POST == '':
+    #     all_comics = Comic.objects.filter(creator__icontains=request.POST['creator'])
+
+    # if 'year' in request.POST == '' and 'creator' in request.POST == '':
+    #     all_comics = Comic.objects.filter(title__icontains=request.POST['title'])
+
+    # if 'title' in request.POST == '' and 'creator' in request.POST == '':
+    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'])
+
+    # if 'title' in request.POST == '' and 'creator' in request.POST == '' and 'year' in request.POST == '':
+    #     all_comics = Comic.objects.all()
+
+    # if 'title' in request.POST != '' and 'creator' in request.POST != '' and 'year' in request.POST != '':
+    #     all_comics = Comic.objects.filter(year__icontains=request.POST['year'],
+    #                                       title__icontains=request.POST['title'],
+    #                                       creator__icontains=request.POST['creator'])
+    
+    # for a in all_comics:
+    #     obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
+    #     created_at_obj = {'title': a.title,'created_at': a.created_at}
+    #     if obj_a in new:
+    #         print(a.title)
+    #     else:
+    #         new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
+    #         new_obj.append(a)
+    #         new_cr_at.append({'title': a.title,'created_at': a.created_at})
+    # all_comics = new_obj  
+
+    # print(new_cr_at)
+    # counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
+    
+    # new_counter = []
+   
+    # for k, g in counter:
+    #     my_count = len(list(g))
+    #     print(k.year, k.month, k.day, my_count)
+    #     new_counter.append({'year': k.year, 'mon': k.month, 'day': k.day, 'c': my_count})
+    # print(new_counter)
+
+    # context = {
+    #     'user': user,
+    #     'all_comics': all_comics,
+    #     'comics': Comic.objects.all(),
+    #     'new_counter': new_counter,  
+    #     'wishlist': wishlist 
+    # }
+    
     all_comics = Comic.objects.all()
-    wishlist = user.added_to_wishlist_comic.all()
     new = []
     new_obj = []
     new_cr_at = []
@@ -130,25 +194,9 @@ def all_c(request, methods=['POST']):
             new_cr_at.append({'title': a.title,'created_at': a.created_at})
     all_comics = new_obj  
 
-    print(new_cr_at)
-    counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
-    
-    new_counter = []
-   
-    for k, g in counter:
-        my_count = len(list(g))
-        print(k.year, k.month, k.day, my_count)
-        new_counter.append({'year': k.year, 'mon': k.month, 'day': k.day, 'c': my_count})
-    print(new_counter)
-
     context = {
-        'user': user,
         'all_comics': all_comics,
-        'comics': Comic.objects.all(),
-        'new_counter': new_counter,  
-        'wishlist': wishlist 
     }
-    
     return render(request, 'comic/all_c.html', context)
 
 
