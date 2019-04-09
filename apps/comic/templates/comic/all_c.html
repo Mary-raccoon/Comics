@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a id="all_comics" class="nav-link active" href="/all_comics" >All comics</a>
+                        <a id="all_comics" class="nav-link active" href="/all_c" >All comics</a>
                     </li>      
                     <li class="nav-item">
                         <a id="wishlist" class="nav-link" href="/wishlist">Wishlist</a>
@@ -44,7 +44,7 @@
     </header>
     <div class="top">
         <div class='filter'>
-            <form action="/all_comics" method="post" >
+            <form action="/all_c" method="post" >
             {% csrf_token %}
                 <label for="year">Year: <input type="text" name="year" ></label>
                 <label for="title">Title: <input type="text" name="title" ></label>
