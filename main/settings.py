@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'vi$d+)y1frs#p*^%gc54g79e%a4no1s4s8n&cq$mpd+i9l^9*+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['54.193.78.218']
+# DEBUG = False
+# ALLOWED_HOSTS = ['54.193.78.218']
 
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -141,6 +141,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-print(AWS_ACCESS_KEY_ID)
-print(AWS_SECRET_ACCESS_KEY)
-print(AWS_STORAGE_BUCKET_NAME)
+# print(AWS_ACCESS_KEY_ID)
+# print(AWS_SECRET_ACCESS_KEY)
+# print(AWS_STORAGE_BUCKET_NAME)
