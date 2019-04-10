@@ -18,7 +18,7 @@
 }
 .all_comics_body, .my_collection_body, .wish_body, .sold_body, .body_login, .body_to_sell {
     text-align: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: cover;
 }
 body {
