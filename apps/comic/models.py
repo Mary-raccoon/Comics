@@ -49,8 +49,14 @@ class User(models.Model):
 class ComicManager(models.Manager):
     def comic_validator(self, postData):
         errors = {}
-        if len(postData['title']) < 4:
+        if len(postData['title']) < 3:
             errors['title'] = "Title should be more then 3 characters"
+        if len(postData['year']) == 0:
+            errors['year'] = "You should choose a cover date"
+        if postData['docfile'] == None:
+            errors['docfile'] = "Choose a file for upload"
+
+        
         return errors
         
 class Comic(models.Model):

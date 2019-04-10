@@ -74,7 +74,7 @@
                 </div>  
                 <div class="create_edit_purchase">  
                     <div class="form-group">
-                        <label for="price">Purchase price:</label>
+                        <label for="price">Estimated cost:</label>
                         <input name="price" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency form-control" id="price" value="{{comic.price}}"/>
                         {% if messages %}
                         <p>
@@ -86,64 +86,11 @@
                         </p>
                         {% endif %}
                     </div> 
-                    <div class="form-group">
-                        <label for="date_of_purchase">Date of purchase<br>(YYYY-MM-DD):</label>
-                        <input class="form-control" name="date_of_purchase" type="text" id="date_of_purchase" value="{{comic.date_of_purchase|date:'Y-m-d'}}"/>
-                        {% if messages %}
-                        <p>
-                            {% for message in messages %}
-                            {%if 'date_of_purchase' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
-                            {% endif %}
-                            {% endfor %}
-                        </p>
-                        {% endif %}
-                    </div> 
-                    <div class="form-group">
-                        <label for="qty">Quantity:</label>
-                        <input type="number" min="0" step="1" name="qty" value="{{comic.qty}}" class="form-control">
-                        {% if messages %}
-                        <p>
-                            {% for message in messages %}
-                            {%if 'qty' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
-                            {% endif %}
-                            {% endfor %}
-                        </p>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="create_edit_sell">
-                    <div class="form-group">
-                        <label for="price_sold">Price sold:</label>
-                        <input name="price_sold" type="number" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class="currency form-control" id="price_sold" value="{{comic.price_sold}}"/>
-                        {% if messages %}
-                        <p>
-                            {% for message in messages %}
-                            {%if 'price_sold' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
-                            {% endif %}
-                            {% endfor %}
-                        </p>
-                        {% endif %}
-                    </div> 
-                    <div class="form-group">
-                        <label for="date_of_sale">Date of sale<br>(YYYY-MM-DD):</label>
-                        <input class="form-control" name="date_of_sale" type="text" id="date_of_sale" value="{{comic.date_of_sale|date:'Y-m-d'}}"/>
-                        {% if messages %}
-                        <p>
-                            {% for message in messages %}
-                            {%if 'date_of_sale' in message.tags %}
-                            <span style="color: red">{{ message }} </span>
-                            {% endif %}
-                            {% endfor %}
-                        </p>
-                        {% endif %}
-                    </div>
                     <div>
                         <input id="docfile" type="file" value="Browse" name="docfile" />
                     </div>
                 </div>
+                
                 <div class="desc form-group">
                     <label for="desc">Description:</label>
                     <textarea rows="8" name="desc" class="form-control" id="desc" value="{{comic.desc}}"></textarea>

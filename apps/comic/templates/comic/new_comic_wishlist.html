@@ -58,7 +58,7 @@
                         {% endif %}
                     </div>  
                     <div class="form-group">
-                        <label for="year">Cover date:</label>
+                        <label for="year">Cover date (YYYY-MM-DD):</label>
                         <input name="year" type="date" class="form-control" id="year">
                         {% if messages %}
                         <p>
@@ -88,6 +88,15 @@
                     <div>
                         <input type="file" value="Browse" name="docfile" />
                     </div>
+                    {% if messages %}
+                    <p>
+                        {% for message in messages %}
+                        {%if 'docfile' in message.tags %}
+                        <span style="color: red">{{ message }} </span>
+                        {% endif %}
+                        {% endfor %}
+                    </p>
+                    {% endif %}
                 </div>
                 <div class="desc form-group">
                     <label for="desc">Description:</label>

@@ -2,7 +2,7 @@
     {% for c in all_comics %}   
         <tr>
             <td><img class="pic" src = "{{ c.docfile.url }}" /></td>
-            <td><a href="/view/{{c.id}}">{{c.title}}</a></td>
+            <td><a href="/view_from_all/{{c.id}}">{{c.title}}</a></td>
             <td>{{c.cover}}</td>
             <td>{{c.creator}}</td>
             <td>{{c.year|date:"M d, Y" }}</td>
