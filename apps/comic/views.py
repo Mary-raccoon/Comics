@@ -15,7 +15,7 @@ def login(request):
         for key, value in errors.items():
             messages.error(request, value, extra_tags="login")
         return redirect('/log_reg')
-    user =User.objects.get(email = request.POST['email1'])
+    user = User.objects.get(email = request.POST['email1'])
     if(bcrypt.checkpw(request.POST['password1'].encode(), user.password.encode())):
         print("password match")
         # user = User.objects.get(email=request.POST['email1'])

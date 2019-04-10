@@ -8,7 +8,7 @@ class UserAdmin(admin.ModelAdmin):
 
 class ComicAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_at')
-
+    list_filter = ('created_at', )
 
 admin.site.site_header = "Comics Administration"
 admin.site.register(User, UserAdmin)

@@ -53,8 +53,8 @@ class ComicManager(models.Manager):
             errors['title'] = "Title should be more then 3 characters"
         if len(postData['year']) == 0:
             errors['year'] = "You should choose a cover date"
-        if postData['docfile'] == None:
-            errors['docfile'] = "Choose a file for upload"
+        # if len(postData['docfile']) == 0:
+        #     errors['docfile'] = "Choose a file for upload"
 
         
         return errors
