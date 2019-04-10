@@ -24,10 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 DEBUG = True
-# ALLOWED_HOSTS = ['comicsmanage.herokuapp.com']
+ALLOWED_HOSTS = ['comicsmanage.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
