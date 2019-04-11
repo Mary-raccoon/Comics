@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/edit_sold$', views.edit_sold),
     url(r'^(?P<id>\d+)/edit_collect$', views.edit_collect),
     url(r'^(?P<id>\d+)/to_sell$', views.to_sell),
+    url(r'^(?P<id>\d+)/to_collect$', views.to_collect),
     url(r'^(?P<id>\d+)/destroy_from_my_collection$', views.destroy_from_my_collection),
     url(r'^(?P<id>\d+)/destroy_from_wishlist$', views.destroy_from_wishlist),
     url(r'^(?P<id>\d+)/destroy_from_sold$', views.destroy_from_sold),

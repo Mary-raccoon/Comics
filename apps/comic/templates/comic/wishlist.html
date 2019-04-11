@@ -92,7 +92,7 @@
                             <td>{{c.year|date:"M d, Y"}}</td>
                             <td>{{c.price}}</td>
                             <td>
-                                <a href="/from_wish_to_collect/{{c.id}}">add to my collection</a>
+                                <a href="/{{c.id}}/to_collect">add to my collection</a>
                             </td> 
                             {% if c.author.id == request.session.id %}
                                 <td>

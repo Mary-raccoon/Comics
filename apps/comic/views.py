@@ -424,12 +424,39 @@ def destroy_from_wishlist(request, id):
 
 
 def from_wish_to_collect(request, id):
-    this_user = User.objects.get(id=request.session['id'])
-    this_comic = Comic.objects.get(id=id)
-    this_comic.wishlist.remove(this_user)
-    this_comic.my_collection.add(this_user)
+    comic = Comic.objects.get(id=id)
+   
+    if request.method == "POST":
+        print("*"*20)
+        this_user = User.objects.get(id=request.session['id'])
+         
+        my_comic = Comic.objects.get(id=id)
+        my_comic.title = comic.title
+        my_comic.desc = comic.desc
+        my_comic.qty = request.POST['qty']
+        my_comic.price = request.POST['price']
+        my_comic.date_of_purchase = request.POST['date_of_purchase']
+        my_comic.creator = comic.creator
+        my_comic.year = comic.year
+        my_comic.cover = comic.cover
+        my_comic.docfile = comic.docfile
+        # sold_comic.date_of_sale = request.POST['date_of_sale']
+        # sold_comic.price_sold = request.POST['price_sold'] 
+        # sold_comic.profit = 0
+        my_comic.save()
+
+        my_comic.wishlist.remove(this_user)
+        my_comic.my_collection.add(this_user)
+
 
     return redirect('/wishlist')
+
+
+def to_collect(request, id):
+    context = {
+		'comic': Comic.objects.get(id=id)
+	}
+    return render(request, 'comic/to_collect.html', context)
 
 
 def my_collection(request, methods=['POST']):
@@ -560,13 +587,13 @@ def update_comic_collect(request, id):
         up_comic.desc = request.POST['desc']
         up_comic.qty = request.POST['qty']
         up_comic.price = request.POST['price']
-        up_comic.price_sold = request.POST['price_sold'] 
         up_comic.date_of_purchase = request.POST['date_of_purchase']
-        up_comic.date_of_sale = request.POST['date_of_sale']
         up_comic.creator = request.POST['creator']
         up_comic.year = request.POST['year']
         up_comic.cover = request.POST['cover']
         up_comic.docfile = docfile
+        # up_comic.date_of_sale = request.POST['date_of_sale']
+        # up_comic.price_sold = request.POST['price_sold'] 
         up_comic.save()
 
         return redirect('/my_collection', docfile="docfile")
@@ -598,7 +625,7 @@ def to_sell(request, id):
 
 def from_collect_to_sold(request, id):
     comic = Comic.objects.get(id=id)
-    qty = Comic.objects.get(id=id).qty
+    qty = comic.qty
    
     if request.method == "POST":
         print("*"*20)
