@@ -30,7 +30,7 @@ class UserManager(models.Manager):
             errors['email1'] = "Email does not exist. Register first!"
         if len(User.objects.filter(email=postData['email1'])) == 1:
             password_hash = User.objects.get(email=postData['email1']).password
-            if bcrypt.checkpw(postData['password1'].encode(), password_hash.encode()) == False:  
+            if bcrypt.checkpw(postData['password1'].encode(), password_hash.encode()) == False:
                 errors['password1'] = "Incorrect password. Try again!"
         return errors
 

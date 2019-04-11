@@ -18,16 +18,15 @@ def login(request):
     user = User.objects.get(email = request.POST['email1'])
     if(bcrypt.checkpw(request.POST['password1'].encode(), user.password.encode())):
         print("password match")
-        # user = User.objects.get(email=request.POST['email1'])
-        request.session['id']=user.id
-        request.session['first_name'] = user.first_name
         print(user.first_name)
+        request.session['id'] = user.id
+        request.session['first_name'] = user.first_name
         request.session['email'] = user.email
         messages.success(request, "You successfully loged in")
         return redirect('/my_collection')
     else:
         print("wrong password")
-        return redirect('/')
+        return redirect('/log_reg')
     print(user.first_name)
  
 
@@ -40,10 +39,16 @@ def register(request):
     else:
         hash_password = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
         print(hash_password)
+        hash_pw = str(hash_password)
+        new_pw = ""
+        for i in range(len(hash_pw)):
+            if (len(hash_pw)-1) > i > 1:
+                new_pw += hash_pw[i]
+        print(new_pw)
         user = User.objects.create(
             first_name=request.POST['first_name'],  
             email=request.POST['email'],
-            password = hash_password
+            password = new_pw
         )
         request.session['first_name'] = user.first_name
         request.session['id']=user.id
