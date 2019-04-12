@@ -164,6 +164,30 @@ def all_c(request, methods=['POST']):
             new_cr_at.append({'title': a.title,'created_at': a.created_at})
     all_comics = new_obj  
 
+    
+    count=0
+    if all_comics:
+        for c in all_comics:
+            if c in wishlist:
+                count=1
+                print("************")
+                print("if c in wishlist ",count)
+            else:
+                print("************")
+                check_list = []
+                for i in wishlist:
+                    
+                    if c.title == i.title and c.cover == i.cover and c.creator == i.creator:
+                        count=1
+                        print("if c.title == i.title ",count)
+                        
+                    else:
+                        count=0
+                        print("else ", count)
+                    check_list.append(count)
+                print("check_list: ", check_list)
+
+
     counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
     
     new_counter = []
@@ -265,10 +289,29 @@ def view_from_all(request, id):
 
 
 def from_all_to_wish(request, id):
+    
+    comic = Comic.objects.get(id=id)
+    
+    new_comic = Comic.objects.create(
+        title = comic.title, 
+        desc = comic.desc, 
+        docfile = comic.docfile,
+        cover = comic.cover,
+        price = comic.price, 
+        author_id = request.session['id'],
+        creator = comic.creator,
+        year = comic.year,
+        qty = 1, 
+        price_sold = 0, 
+        profit = 0,
+        date_of_purchase = None, 
+        date_of_sale = None, 
+    )
     this_user = User.objects.get(id=request.session['id'])
-    this_comic = Comic.objects.get(id=id)
+    this_comic = Comic.objects.get(id=new_comic.id)
     this_comic.wishlist.add(this_user)
-
+    print("this_comic.id: ", this_comic.id)
+    print("new_comic.id: ", new_comic.id)
     return redirect('/all_c')
 
 

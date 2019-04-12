@@ -46,9 +46,9 @@
         <div class='filter'>
             <form action="/all_c" method="post" >
             {% csrf_token %}
-                <label for="year">Year: <input type="text" name="year" ></label>
-                <label for="title">Title: <input type="text" name="title" ></label>
-                <label for="creator">Author: <input type="text" name="creator" ></label>
+                <label for="year">Year: <input type="text" name="year" class="form-control"></label>
+                <label for="title">Title: <input type="text" name="title" class="form-control"></label>
+                <label for="creator">Author: <input type="text" name="creator" class="form-control"></label>
                 <button class="btn btn-dark">Search</button>
             </form>
         </div>
@@ -94,6 +94,11 @@
                                 {% if c in wishlist %}
                                     <img class="checkmark" src="/static/comic/img/16.png">
                                 {% else %}
+                                    {% for i in wishlist %}
+                                        {% if c.title == i.title and c.cover == i.cover and c.creator == i.creator %}
+                                            <img class="checkmark" src="/static/comic/img/16.png">
+                                        {% endif %}
+                                    {% endfor %} 
                                     <a href="from_all_to_wish/{{c.id}}">To my wishlist</a>
                                 {% endif %} 
                             </td>

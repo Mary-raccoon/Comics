@@ -12,6 +12,7 @@
     display: inline-block;
     width: 15%;
     margin: 1%;    
+    vertical-align: top;
 }
 .all_comics_body {
     background-image: url("/static/comic/img/1.jpg");
@@ -119,6 +120,7 @@ body {
     display: inline-block;
     width: 20%;
     margin: 1%;
+    vertical-align: top;
 }
 .form_sort select {
     width: 70%;
