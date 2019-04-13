@@ -116,9 +116,12 @@ def before(request, methods=['POST']):
 
 
 def all_c(request, methods=['POST']):
-    all_comics = Comic.objects.all()
     user = User.objects.get(id=request.session['id'])
+    all_comics = Comic.objects.all()
     wishlist = user.added_to_wishlist_comic.all()
+    my_comics = user.added_to_my_collect_comic.all()
+    sold = user.added_to_sold_comic.all()
+
     print("user: ", request.session['id'])
     new = []
     new_obj = []
@@ -153,6 +156,43 @@ def all_c(request, methods=['POST']):
                                           title__icontains=request.POST['title'],
                                           creator__icontains=request.POST['creator'])
     
+    for w in wishlist:
+        obj_a = {'title': w.title, 'cover': w.cover, 'creator':w.creator}
+        created_at_obj = {'title': w.title,'created_at': w.created_at}
+        if obj_a in new:
+            print(w.title)
+        else:
+            new.append({'title': w.title, 'cover': w.cover, 'creator':w.creator})
+            new_obj.append(w)
+            new_cr_at.append({'title': w.title,'created_at': w.created_at})
+        
+    print("len(new_obj) ",len(new_obj))
+
+
+    for m in my_comics:
+        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
+        created_at_obj = {'title': m.title,'created_at': m.created_at}
+        if obj_a in new:
+            print(m.title)
+        else:
+            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
+            new_obj.append(m)
+            new_cr_at.append({'title': m.title,'created_at': m.created_at})
+    print("len(new_obj) ",len(new_obj))
+
+
+    for m in sold:
+        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
+        created_at_obj = {'title': m.title,'created_at': m.created_at}
+        if obj_a in new:
+            print(m.title)
+        else:
+            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
+            new_obj.append(m)
+            new_cr_at.append({'title': m.title,'created_at': m.created_at})
+    print("len(new_obj) ",len(new_obj))
+
+    
     for a in all_comics:
         obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
         created_at_obj = {'title': a.title,'created_at': a.created_at}
@@ -163,30 +203,6 @@ def all_c(request, methods=['POST']):
             new_obj.append(a)
             new_cr_at.append({'title': a.title,'created_at': a.created_at})
     all_comics = new_obj  
-
-    
-    count=0
-    if all_comics:
-        for c in all_comics:
-            if c in wishlist:
-                count=1
-                print("************")
-                print("if c in wishlist ",count)
-            else:
-                print("************")
-                check_list = []
-                for i in wishlist:
-                    
-                    if c.title == i.title and c.cover == i.cover and c.creator == i.creator:
-                        count=1
-                        print("if c.title == i.title ",count)
-                        
-                    else:
-                        count=0
-                        print("else ", count)
-                    check_list.append(count)
-                print("check_list: ", check_list)
-
 
     counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
     
@@ -202,7 +218,8 @@ def all_c(request, methods=['POST']):
         'user': user,
         'all_comics': all_comics,
         'new_counter': new_counter,  
-        'wishlist': wishlist 
+        'wishlist': wishlist,
+        'comics': Comic.objects.all()
     }
     
     return render(request, 'comic/all_c.html', context)
