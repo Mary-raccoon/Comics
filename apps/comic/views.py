@@ -229,6 +229,9 @@ def sort_all(request, methods=['POST']):
     user = User.objects.get(id=request.session['id'])
     all_comics = []
     wishlist = user.added_to_wishlist_comic.all()
+    my_comics = user.added_to_my_collect_comic.all()
+    sold = user.added_to_sold_comic.all()
+
     new = []
     new_obj=[]
 
@@ -246,7 +249,27 @@ def sort_all(request, methods=['POST']):
     
     if request.POST['sort'] == 'Last_added':
         all_comics = Comic.objects.order_by('-created_at')
-       
+
+    for m in my_comics:
+        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
+        if obj_a in new:
+            print(m.title)
+        else:
+            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
+            new_obj.append(m)
+    print("len(new_obj) ",len(new_obj))
+
+
+    for m in sold:
+        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
+        if obj_a in new:
+            print(m.title)
+        else:
+            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
+            new_obj.append(m)
+    print("len(new_obj) ",len(new_obj))
+
+    
     for a in all_comics:
         obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
         if obj_a in new:
@@ -255,6 +278,8 @@ def sort_all(request, methods=['POST']):
             new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
             new_obj.append(a)
     all_comics = new_obj  
+
+    
     user = User.objects.get(id=request.session['id'])
     wishlist = user.added_to_wishlist_comic.all()
     context = {
