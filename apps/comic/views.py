@@ -114,7 +114,6 @@ def before(request, methods=['POST']):
     return render(request, 'comic/before.html', context)
 
 
-
 def all_c(request, methods=['POST']):
     user = User.objects.get(id=request.session['id'])
     all_comics = Comic.objects.all()
@@ -156,6 +155,7 @@ def all_c(request, methods=['POST']):
                                           title__icontains=request.POST['title'],
                                           creator__icontains=request.POST['creator'])
     
+    print("after if: ", all_comics)
     for w in wishlist:
         obj_a = {'title': w.title, 'cover': w.cover, 'creator':w.creator}
         created_at_obj = {'title': w.title,'created_at': w.created_at}
@@ -166,7 +166,7 @@ def all_c(request, methods=['POST']):
             new_obj.append(w)
             new_cr_at.append({'title': w.title,'created_at': w.created_at})
         
-    print("len(new_obj) ",len(new_obj))
+    print("len(new_obj1) ",len(new_obj))
 
 
     for m in my_comics:
@@ -178,7 +178,7 @@ def all_c(request, methods=['POST']):
             new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
             new_obj.append(m)
             new_cr_at.append({'title': m.title,'created_at': m.created_at})
-    print("len(new_obj) ",len(new_obj))
+    print("len(new_obj2) ",len(new_obj))
 
 
     for m in sold:
@@ -190,7 +190,7 @@ def all_c(request, methods=['POST']):
             new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
             new_obj.append(m)
             new_cr_at.append({'title': m.title,'created_at': m.created_at})
-    print("len(new_obj) ",len(new_obj))
+    print("len(new_obj3) ",len(new_obj))
 
     
     for a in all_comics:
@@ -202,8 +202,11 @@ def all_c(request, methods=['POST']):
             new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
             new_obj.append(a)
             new_cr_at.append({'title': a.title,'created_at': a.created_at})
-    all_comics = new_obj  
+    print("len(new_obj4) ",len(new_obj))
 
+
+    print("all_comics = new_obj: ", all_comics)
+    
     counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
     
     new_counter = []
@@ -219,21 +222,69 @@ def all_c(request, methods=['POST']):
         'all_comics': all_comics,
         'new_counter': new_counter,  
         'wishlist': wishlist,
-        'comics': Comic.objects.all()
+        'new_obj': new_obj
     }
     
     return render(request, 'comic/all_c.html', context)
 
-
 def sort_all(request, methods=['POST']):
     user = User.objects.get(id=request.session['id'])
-    all_comics = []
+    all_comics = Comic.objects.all()
     wishlist = user.added_to_wishlist_comic.all()
     my_comics = user.added_to_my_collect_comic.all()
     sold = user.added_to_sold_comic.all()
 
     new = []
-    new_obj=[]
+    new_obj = []
+    id_com = []
+
+    for w in wishlist:
+        obj_a = {'title': w.title, 'cover': w.cover, 'creator':w.creator}
+        id_list = {'com_id': w.id}
+        if obj_a in new:
+            print(w.title)
+        else:
+            new.append({'title': w.title, 'cover': w.cover, 'creator':w.creator})
+            new_obj.append(w)
+            id_com.append(w.id)
+
+    print("len(new_obj1) ",len(new_obj))
+
+    for m in my_comics:
+        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
+        id_list = {'com_id': m.id}
+        if obj_a in new:
+            print(m.title)
+        else:
+            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
+            new_obj.append(m)
+            id_com.append(m.id)
+    print("len(new_obj2) ",len(new_obj))
+
+
+    for m in sold:
+        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
+        id_list = {'com_id': m.id}
+        if obj_a in new:
+            print(m.title)
+        else:
+            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
+            new_obj.append(m)
+            id_com.append(m.id)
+    print("len(new_obj3) ",len(new_obj))
+
+    
+    for a in all_comics:
+        obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
+        id_list = {'com_id': a.id}
+        if obj_a in new:
+            print(a.title)
+        else:
+            new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
+            new_obj.append(a)
+            id_com.append(a.id)
+    print("len(new_obj4) ", len(new_obj))
+    print("id_list ", id_com)
 
     if request.POST['sort'] == 'Title_a':
         all_comics = Comic.objects.order_by('title')
@@ -249,43 +300,13 @@ def sort_all(request, methods=['POST']):
     
     if request.POST['sort'] == 'Last_added':
         all_comics = Comic.objects.order_by('-created_at')
+       
 
-    for m in my_comics:
-        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
-        if obj_a in new:
-            print(m.title)
-        else:
-            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
-            new_obj.append(m)
-    print("len(new_obj) ",len(new_obj))
-
-
-    for m in sold:
-        obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
-        if obj_a in new:
-            print(m.title)
-        else:
-            new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
-            new_obj.append(m)
-    print("len(new_obj) ",len(new_obj))
-
-    
-    for a in all_comics:
-        obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
-        if obj_a in new:
-            print(a.title)
-        else:
-            new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
-            new_obj.append(a)
-    all_comics = new_obj  
-
-    
-    user = User.objects.get(id=request.session['id'])
-    wishlist = user.added_to_wishlist_comic.all()
     context = {
         'all_comics': all_comics,
         'user': user,
-        'wishlist': wishlist 
+        'wishlist': wishlist, 
+        'new_obj': new_obj
     }
     return render(request, 'comic/sort_all.html', context)
 
@@ -303,7 +324,7 @@ def update_comic_all(request, id):
     if request.method == "POST":
         print("*"*20)
         up_comic = Comic.objects.get(id=id)
-        up_comic.title = request.POST['title']
+        up_comic.title = request.POST['title'].capitalize()
         up_comic.desc = request.POST['desc']
         up_comic.qty = request.POST['qty']
         up_comic.price = request.POST['price']
@@ -335,7 +356,7 @@ def from_all_to_wish(request, id):
     comic = Comic.objects.get(id=id)
     
     new_comic = Comic.objects.create(
-        title = comic.title, 
+        title = comic.title.capitalize(), 
         desc = comic.desc, 
         docfile = comic.docfile,
         cover = comic.cover,
@@ -462,6 +483,7 @@ def sort_wish(request, methods=['POST']):
     return render(request, 'comic/sort_wish.html', context)
 
 
+
 def edit_wish(request, id):
     context = {
 		'comic': Comic.objects.get(id=id)
@@ -475,17 +497,13 @@ def update_comic_wish(request, id):
     if request.method == "POST":
         print("*"*20)
         up_comic = Comic.objects.get(id=id)
-        up_comic.title = request.POST['title']
+        up_comic.title = request.POST['title'].capitalize()
         up_comic.desc = request.POST['desc']
         up_comic.price = request.POST['price']
         up_comic.creator = request.POST['creator']
         up_comic.year = request.POST['year']
         up_comic.cover = request.POST['cover']
         up_comic.docfile = docfile
-        # up_comic.qty = request.POST['qty']
-        # up_comic.price_sold = request.POST['price_sold'] 
-        # up_comic.date_of_purchase = request.POST['date_of_purchase']
-        # up_comic.date_of_sale = request.POST['date_of_sale']
         up_comic.save()
 
         return redirect('/wishlist', docfile="docfile")
@@ -516,7 +534,7 @@ def from_wish_to_collect(request, id):
         this_user = User.objects.get(id=request.session['id'])
          
         my_comic = Comic.objects.get(id=id)
-        my_comic.title = comic.title
+        my_comic.title = comic.title.capitalize()
         my_comic.desc = comic.desc
         my_comic.qty = request.POST['qty']
         my_comic.price = request.POST['price']
@@ -525,9 +543,6 @@ def from_wish_to_collect(request, id):
         my_comic.year = comic.year
         my_comic.cover = comic.cover
         my_comic.docfile = comic.docfile
-        # sold_comic.date_of_sale = request.POST['date_of_sale']
-        # sold_comic.price_sold = request.POST['price_sold'] 
-        # sold_comic.profit = 0
         my_comic.save()
 
         my_comic.wishlist.remove(this_user)
@@ -668,7 +683,7 @@ def update_comic_collect(request, id):
     if request.method == "POST":
         print("*"*20)
         up_comic = Comic.objects.get(id=id)
-        up_comic.title = request.POST['title']
+        up_comic.title = request.POST['title'].capitalize()
         up_comic.desc = request.POST['desc']
         up_comic.qty = request.POST['qty']
         up_comic.price = request.POST['price']
@@ -677,8 +692,6 @@ def update_comic_collect(request, id):
         up_comic.year = request.POST['year']
         up_comic.cover = request.POST['cover']
         up_comic.docfile = docfile
-        # up_comic.date_of_sale = request.POST['date_of_sale']
-        # up_comic.price_sold = request.POST['price_sold'] 
         up_comic.save()
 
         return redirect('/my_collection', docfile="docfile")
@@ -717,7 +730,7 @@ def from_collect_to_sold(request, id):
         this_user = User.objects.get(id=request.session['id'])
          
         sold_comic = Comic.objects.get(id=id)
-        sold_comic.title = comic.title
+        sold_comic.title = comic.title.capitalize()
         sold_comic.desc = comic.desc
         sold_comic.qty = request.POST['qty']
         sold_comic.price = request.POST['price']
@@ -744,7 +757,7 @@ def from_collect_to_sold(request, id):
         elif int(qty) > int(sold_comic.qty):
             
             sold_comic = Comic.objects.create(
-                title = comic.title,
+                title = comic.title.capitalize(),
                 desc = comic.desc,
                 qty = request.POST['qty'],
                 price = request.POST['price'],
@@ -862,7 +875,7 @@ def update_comic_sold(request, id):
     if request.method == "POST":
         print("*"*20)
         up_comic = Comic.objects.get(id=id)
-        up_comic.title = request.POST['title']
+        up_comic.title = request.POST['title'].capitalize()
         up_comic.desc = request.POST['desc']
         up_comic.qty = request.POST['qty']
         up_comic.price = request.POST['price']

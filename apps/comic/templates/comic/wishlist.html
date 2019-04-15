@@ -50,7 +50,7 @@
             </form>
         </div>
         <div class="form_sort">
-            <form action="/sort" method="post" id='sort_form_wish'>
+            <form action="/sort_wish" method="post" id='sort_form_wish'>
                 {% csrf_token %}
                 <select name="sort" class="custom-select mr-sm-2" >
                     <option value="Choose" selected>Choose...</option>
@@ -80,8 +80,8 @@
                     <th>Functions</th>  
                 </tr>
             </thead>
-            <tbody class="placeholder"></tbody>
-            <tbody>
+            <tbody class="placeholder">
+            
                 {% if wishlist %}
                     {% for c in wishlist %}                       
                         <tr>
