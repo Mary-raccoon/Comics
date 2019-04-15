@@ -120,11 +120,26 @@ def all_c(request, methods=['POST']):
     wishlist = user.added_to_wishlist_comic.all()
     my_comics = user.added_to_my_collect_comic.all()
     sold = user.added_to_sold_comic.all()
-
-    print("user: ", request.session['id'])
+    
     new = []
     new_obj = []
     new_cr_at = []
+
+    for a in all_comics:
+        created_at_obj = {'title': a.title,'created_at': a.created_at}
+        new_cr_at.append({'title': a.title,'created_at': a.created_at})
+    
+    counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
+    
+    new_counter = []
+   
+    for k, g in counter:
+        my_count = len(list(g))
+        print(k.year, k.month, k.day, my_count)
+        new_counter.append({'year': k.year, 'mon': k.month, 'day': k.day, 'c': my_count})
+    print(new_counter)
+    print("user: ", request.session['id'])
+    
 
     if 'year' in request.POST == '':
         all_comics = Comic.objects.filter(title__icontains=request.POST['title'],
@@ -158,65 +173,44 @@ def all_c(request, methods=['POST']):
     print("after if: ", all_comics)
     for w in wishlist:
         obj_a = {'title': w.title, 'cover': w.cover, 'creator':w.creator}
-        created_at_obj = {'title': w.title,'created_at': w.created_at}
         if obj_a in new:
             print(w.title)
         else:
             new.append({'title': w.title, 'cover': w.cover, 'creator':w.creator})
             new_obj.append(w)
-            new_cr_at.append({'title': w.title,'created_at': w.created_at})
         
     print("len(new_obj1) ",len(new_obj))
 
 
     for m in my_comics:
         obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
-        created_at_obj = {'title': m.title,'created_at': m.created_at}
         if obj_a in new:
             print(m.title)
         else:
             new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
             new_obj.append(m)
-            new_cr_at.append({'title': m.title,'created_at': m.created_at})
     print("len(new_obj2) ",len(new_obj))
 
 
     for m in sold:
         obj_a = {'title': m.title, 'cover': m.cover, 'creator':m.creator}
-        created_at_obj = {'title': m.title,'created_at': m.created_at}
         if obj_a in new:
             print(m.title)
         else:
             new.append({'title': m.title, 'cover': m.cover, 'creator':m.creator})
             new_obj.append(m)
-            new_cr_at.append({'title': m.title,'created_at': m.created_at})
     print("len(new_obj3) ",len(new_obj))
 
     
     for a in all_comics:
         obj_a = {'title': a.title, 'cover': a.cover, 'creator':a.creator}
-        created_at_obj = {'title': a.title,'created_at': a.created_at}
         if obj_a in new:
             print(a.title)
         else:
             new.append({'title': a.title, 'cover': a.cover, 'creator':a.creator})
             new_obj.append(a)
-            new_cr_at.append({'title': a.title,'created_at': a.created_at})
     print("len(new_obj4) ",len(new_obj))
-
-
-    print("all_comics = new_obj: ", all_comics)
     
-    counter = groupby(sorted(new_cr_at, key=lambda x: x['created_at']), lambda x: x['created_at'])
-    
-    new_counter = []
-   
-    for k, g in counter:
-        my_count = len(list(g))
-        print(k.year, k.month, k.day, my_count)
-        new_counter.append({'year': k.year, 'mon': k.month, 'day': k.day, 'c': my_count})
-    print(new_counter)
-
     context = {
         'user': user,
         'all_comics': all_comics,
