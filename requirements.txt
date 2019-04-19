@@ -18,5 +18,5 @@ python-dateutil==2.8.0
 pytz==2018.9
 s3transfer==0.2.0
 six==1.11.0
-urllib3==1.24.1
+urllib3==1.24.2
 whitenoise==4.1.2
