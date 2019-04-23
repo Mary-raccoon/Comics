@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'comic/css/style.css' %}">
-    <title>Go to Signin/register</title>  
+    <title>All Comics</title>  
 </head>
 <body class="all_comics_body">
     <header>
@@ -137,21 +137,22 @@
                 },
                 axisX: {
                     title: "Date",
-                    valueFormatString: "YYYY-MM-DD"
+                    includeZero: false,
+                    valueFormatString: "MM/DD/YYYY"
                 },
                 axisY: {
                     title: "Qty",
-                    includeZero: false,
+                    includeZero: true,
                 },
                 data: [{
                     yValueFormatString: "#,###",
-                    xValueFormatString: "YYYY-MM-DD",
+                    xValueFormatString: "MM/DD/YYYY",
                     type: "spline",
                     toolTipContent: "{x} - {y}qty",
                     dataPoints: [
                         {% for d in new_counter %}
                             
-                            { x: new Date({{d.year}}, {{d.mon}}, {{d.day}}), y: {{d.c}} },
+                            { x: new Date({{d.year}}, {{d.mon}}-1, {{d.day}}), y: {{d.c}} },
                                 
                         {% endfor %}
                     ]
